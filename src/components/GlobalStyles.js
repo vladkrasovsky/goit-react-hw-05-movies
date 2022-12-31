@@ -4,6 +4,7 @@ import 'modern-normalize';
 export const GlobalStyle = createGlobalStyle`
   body {
     margin: 0;
+    line-height: 1.6;
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
       'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
       sans-serif;
@@ -20,6 +21,5 @@ export const GlobalStyle = createGlobalStyle`
   ul {
     margin: 0;
     padding: 0;
-    list-style: none;
   }
 `;
