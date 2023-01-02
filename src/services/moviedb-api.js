@@ -59,10 +59,25 @@ async function getCredits(movieId) {
   return data;
 }
 
+async function getReviews(movieId) {
+  const urlAXIOS = `movie/${movieId}/reviews`;
+  const { data } = await axios.get(urlAXIOS, params);
+
+  const normalizedResults = data.results.map(({ id, author, content }) => ({
+    id,
+    author,
+    content,
+  }));
+
+  data.results = normalizedResults;
+  return data;
+}
+
 const api = {
   getTrendings,
   getMovieDetails,
   getCredits,
+  getReviews,
 };
 
 export default api;

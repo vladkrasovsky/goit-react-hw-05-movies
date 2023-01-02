@@ -1,11 +1,14 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useOutletContext } from 'react-router-dom';
 import moviesAPI from 'services/moviedb-api';
 import { Box } from 'components/Box';
 
 const Cast = () => {
+  const { executeScroll } = useOutletContext();
   const { movieId } = useParams();
   const [cast, setCast] = useState();
+
+  useEffect(executeScroll);
 
   useEffect(() => {
     async function fetchCredits() {

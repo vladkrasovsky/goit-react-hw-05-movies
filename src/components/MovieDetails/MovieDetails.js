@@ -1,5 +1,5 @@
 import { Box } from 'components/Box';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link, Outlet, useParams, useNavigate } from 'react-router-dom';
 import moviesAPI from 'services/moviedb-api';
 import { GenresList, Footer, FooterList } from './MovieDetails.styled';
@@ -8,6 +8,9 @@ const MovieDetails = () => {
   const navigate = useNavigate();
   const { movieId } = useParams();
   const [movie, setMovie] = useState();
+  const footerRef = useRef();
+
+  const executeScroll = () => footerRef.current.scrollIntoView();
 
   useEffect(() => {
     async function fetchMovie() {
@@ -66,7 +69,7 @@ const MovieDetails = () => {
           )}
         </Box>
       </Box>
-      <Footer>
+      <Footer ref={footerRef}>
         <Box as="p" mt={3}>
           Additional information
         </Box>
@@ -79,7 +82,7 @@ const MovieDetails = () => {
           </li>
         </FooterList>
       </Footer>
-      <Outlet />
+      <Outlet context={{ executeScroll }} />
     </>
   );
 };
