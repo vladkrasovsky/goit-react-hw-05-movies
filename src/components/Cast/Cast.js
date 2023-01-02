@@ -22,6 +22,14 @@ const Cast = () => {
     return null;
   }
 
+  if (!cast.length) {
+    return (
+      <Box as="p" mt={3}>
+        We don't have any cast for this movie.
+      </Box>
+    );
+  }
+
   return (
     <Box as="ul" p={3} display="flex" flexWrap="wrap" gridGap={10}>
       {cast.map(({ character, original_name, profile_path }) => {
