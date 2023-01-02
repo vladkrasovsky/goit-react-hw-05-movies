@@ -73,11 +73,25 @@ async function getReviews(movieId) {
   return data;
 }
 
+async function searchMovies(query) {
+  const urlAXIOS = `search/movie?query=${query}`;
+  const { data } = await axios.get(urlAXIOS, params);
+
+  const normalizedResults = data.results.map(({ id, title }) => ({
+    id,
+    title,
+  }));
+
+  data.results = normalizedResults;
+  return data;
+}
+
 const api = {
   getTrendings,
   getMovieDetails,
   getCredits,
   getReviews,
+  searchMovies,
 };
 
 export default api;
