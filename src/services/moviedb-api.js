@@ -24,8 +24,26 @@ async function getTrendings(page = 1) {
   return data;
 }
 
+async function getMovieDetails(movieId) {
+  const urlAXIOS = `movie/${movieId}`;
+
+  const { data } = await axios.get(urlAXIOS, params);
+  const { original_title, overview, vote_average, genres, poster_path } = data;
+
+  return {
+    original_title,
+    overview,
+    vote_average: vote_average.toFixed(1),
+    genres,
+    poster_path: poster_path
+      ? config.POSTER_BASE_URL + poster_path
+      : config.POSTER_PLACEHOLDER_URL,
+  };
+}
+
 const api = {
   getTrendings,
+  getMovieDetails,
 };
 
 export default api;
