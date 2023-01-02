@@ -2,6 +2,9 @@ import { createGlobalStyle } from 'styled-components';
 import 'modern-normalize';
 
 export const GlobalStyle = createGlobalStyle`
+  html {
+    scroll-behavior: smooth;
+  }
   body {
     margin: 0;
     line-height: 1.6;
@@ -21,5 +24,8 @@ export const GlobalStyle = createGlobalStyle`
   ul {
     margin: 0;
     padding: 0;
+  }
+  button {
+    cursor: pointer;
   }
 `;
