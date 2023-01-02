@@ -33,7 +33,7 @@ const MovieDetails = () => {
   return (
     <>
       <Link to="/">&larr; Go back</Link>
-      <Box display="flex" mt={3}>
+      <Box display="flex" mt={3} alignItems="flex-start">
         <img src={poster_path} alt="" width={250} />
 
         <Box p={4}>
