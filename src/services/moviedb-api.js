@@ -41,9 +41,28 @@ async function getMovieDetails(movieId) {
   };
 }
 
+async function getCredits(movieId) {
+  const urlAXIOS = `movie/${movieId}/credits`;
+  const { data } = await axios.get(urlAXIOS, params);
+
+  const normalizedCast = data.cast.map(
+    ({ character, original_name, profile_path }) => ({
+      character,
+      original_name,
+      profile_path: profile_path
+        ? config.POSTER_BASE_URL + profile_path
+        : config.POSTER_PLACEHOLDER_URL,
+    })
+  );
+
+  data.cast = normalizedCast;
+  return data;
+}
+
 const api = {
   getTrendings,
   getMovieDetails,
+  getCredits,
 };
 
 export default api;
