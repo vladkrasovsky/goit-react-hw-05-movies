@@ -7,7 +7,7 @@ const MoviesList = ({ movies }) => {
       {movies.map(({ id, title }) => {
         return (
           <Box as="li" key={id}>
-            <NavLink to={`movies/${id}`}>{title}</NavLink>
+            <NavLink to={`/movies/${id}`}>{title}</NavLink>
           </Box>
         );
       })}
