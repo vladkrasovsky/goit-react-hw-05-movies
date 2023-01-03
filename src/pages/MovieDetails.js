@@ -5,7 +5,6 @@ import moviesAPI from 'services/moviedb-api';
 import Poster from 'components/Poster';
 import GenresList from 'components/GenresList';
 import MovieDetailsNavBar from 'components/MovieDetailsNavBar';
-import { NotFound } from './NotFound';
 
 export const MovieDetails = () => {
   const navigate = useNavigate();
@@ -32,7 +31,7 @@ export const MovieDetails = () => {
   }, [movieId, navigate]);
 
   if (!movie) {
-    return <NotFound />;
+    return null;
   }
 
   const { original_title, overview, vote_average, genres, poster_path } = movie;
