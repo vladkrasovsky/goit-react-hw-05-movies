@@ -18,7 +18,7 @@ export const MovieDetails = () => {
   useEffect(() => {
     async function fetchMovie() {
       try {
-        const movieDetails = await moviesAPI.getMovieDetails(movieId);
+        const movieDetails = await moviesAPI.getMovieDetails(Number(movieId));
         if (!movieDetails) {
           console.log('Oooh oh, there are no results.');
           return;
