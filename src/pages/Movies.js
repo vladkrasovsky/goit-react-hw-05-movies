@@ -29,7 +29,7 @@ export const Movies = () => {
 
   return (
     <>
-      <SearchForm onSubmit={getQuery} />
+      <SearchForm query={query} onSubmit={getQuery} />
       {renderMovies && <MoviesList movies={movies} />}
     </>
   );
