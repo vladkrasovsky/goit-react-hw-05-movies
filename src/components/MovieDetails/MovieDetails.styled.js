@@ -14,3 +14,10 @@ export const Footer = styled.footer`
 export const FooterList = styled.ul`
   padding: 10px 30px;
 `;
+
+export const Poster = styled.img`
+  background-color: #eee;
+  flex-basis: 250px;
+  flex-shrink: 0;
+  min-height: 340px;
+`;

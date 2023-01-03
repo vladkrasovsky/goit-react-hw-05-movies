@@ -1,4 +1,4 @@
-import { NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Box } from 'components/Box';
 
 const MoviesList = ({ movies }) => {
@@ -7,7 +7,7 @@ const MoviesList = ({ movies }) => {
       {movies.map(({ id, title }) => {
         return (
           <Box as="li" key={id}>
-            <NavLink to={`/movies/${id}`}>{title}</NavLink>
+            <Link to={`/movies/${id}`}>{title}</Link>
           </Box>
         );
       })}

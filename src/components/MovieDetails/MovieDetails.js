@@ -2,7 +2,7 @@ import { Box } from 'components/Box';
 import { useEffect, useRef, useState } from 'react';
 import { Link, Outlet, useParams, useNavigate } from 'react-router-dom';
 import moviesAPI from 'services/moviedb-api';
-import { GenresList, Footer, FooterList } from './MovieDetails.styled';
+import { GenresList, Footer, FooterList, Poster } from './MovieDetails.styled';
 
 const MovieDetails = () => {
   const navigate = useNavigate();
@@ -38,7 +38,7 @@ const MovieDetails = () => {
     <>
       <button onClick={() => navigate(-1)}>&larr; Go back</button>
       <Box display="flex" mt={3} alignItems="flex-start">
-        <img src={poster_path} alt="" width={250} />
+        <Poster src={poster_path} alt="" width={250} />
 
         <Box p={4}>
           <h2>{original_title}</h2>
