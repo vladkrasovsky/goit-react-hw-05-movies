@@ -5,17 +5,27 @@ import { useSearchParams } from 'react-router-dom';
 import moviesAPI from 'services/moviedb-api';
 
 export const Movies = () => {
-  const [movies, setMovies] = useState();
+  const [movies, setMovies] = useState([]);
+  const [status, setStatus] = useState('idle');
   const [searchParams, setSearchParams] = useSearchParams();
-  const query = searchParams.get('query') || '';
+  const query = searchParams.get('query') ?? '';
 
   useEffect(() => {
-    if (query === '') return;
+    if (query === '') {
+      setMovies([]);
+      setStatus('idle');
+      return;
+    }
 
     async function fetchMovies() {
       try {
         const { results } = await moviesAPI.searchMovies(query);
         setMovies([...results]);
+        if (results.length > 0) {
+          setStatus('resolved');
+          return;
+        }
+        setStatus('empty');
       } catch (error) {
         console.log(error.message);
       }
@@ -24,13 +34,13 @@ export const Movies = () => {
     fetchMovies();
   }, [query]);
 
-  const getQuery = query => setSearchParams({ query });
-  const renderMovies = movies && query;
+  const getQuery = query => setSearchParams(query !== '' ? { query } : {});
 
   return (
     <>
       <SearchForm query={query} onSubmit={getQuery} />
-      {renderMovies && <MoviesList movies={movies} />}
+      {status === 'empty' && <p>No matches for your query..</p>}
+      {status === 'resolved' && <MoviesList movies={movies} />}
     </>
   );
 };
