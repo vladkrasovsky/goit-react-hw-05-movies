@@ -4,7 +4,7 @@ import { Layout } from './Layout';
 import { Home } from 'pages/Home';
 import { Movies } from 'pages/Movies';
 import { NotFound } from 'pages/NotFound';
-import MovieDetails from './MovieDetails';
+import { MovieDetails } from 'pages/MovieDetails';
 import Cast from 'components/Cast';
 import Reviews from 'components/Reviews';
 

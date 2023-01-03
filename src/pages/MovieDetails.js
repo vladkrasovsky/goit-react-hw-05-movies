@@ -1,10 +1,13 @@
 import { Box } from 'components/Box';
 import { useEffect, useRef, useState } from 'react';
-import { Link, Outlet, useParams, useNavigate } from 'react-router-dom';
+import { Outlet, useParams, useNavigate } from 'react-router-dom';
 import moviesAPI from 'services/moviedb-api';
-import { GenresList, Footer, FooterList, Poster } from './MovieDetails.styled';
+import Poster from 'components/Poster';
+import GenresList from 'components/GenresList';
+import MovieDetailsNavBar from 'components/MovieDetailsNavBar';
+import { NotFound } from './NotFound';
 
-const MovieDetails = () => {
+export const MovieDetails = () => {
   const navigate = useNavigate();
   const { movieId } = useParams();
   const [movie, setMovie] = useState();
@@ -26,10 +29,10 @@ const MovieDetails = () => {
       }
     }
     fetchMovie();
-  }, [movieId]);
+  }, [movieId, navigate]);
 
   if (!movie) {
-    return null;
+    return <NotFound />;
   }
 
   const { original_title, overview, vote_average, genres, poster_path } = movie;
@@ -37,8 +40,9 @@ const MovieDetails = () => {
   return (
     <>
       <button onClick={() => navigate(-1)}>&larr; Go back</button>
+
       <Box display="flex" mt={3} alignItems="flex-start">
-        <Poster src={poster_path} alt="" width={250} />
+        <Poster src={poster_path} width={250} alt={original_title} />
 
         <Box p={4}>
           <h2>{original_title}</h2>
@@ -56,35 +60,22 @@ const MovieDetails = () => {
             <b>Genres</b>
           </Box>
 
-          {genres.length && (
-            <GenresList>
-              {genres.map(({ id, name }) => {
-                return (
-                  <Box as="li" mr={3} key={id}>
-                    {name}
-                  </Box>
-                );
-              })}
-            </GenresList>
-          )}
+          {genres.length > 0 && <GenresList genres={genres} />}
         </Box>
       </Box>
-      <Footer ref={footerRef}>
-        <Box as="p" mt={3}>
-          Additional information
-        </Box>
-        <FooterList>
-          <li>
-            <Link to={`/movies/${movieId}/cast`}>Cast</Link>
-          </li>
-          <li>
-            <Link to={`/movies/${movieId}/reviews`}>Reviews</Link>
-          </li>
-        </FooterList>
-      </Footer>
+
+      <Box
+        as="footer"
+        ref={footerRef}
+        mt={3}
+        borderTop="2px solid"
+        borderBottom="2px solid"
+      >
+        <Box as="p">Additional information</Box>
+        <MovieDetailsNavBar movieId={movieId} />
+      </Box>
+
       <Outlet context={{ executeScroll }} />
     </>
   );
 };
-
-export default MovieDetails;
