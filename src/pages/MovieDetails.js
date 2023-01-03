@@ -28,7 +28,7 @@ export const MovieDetails = () => {
       }
     }
     fetchMovie();
-  }, [movieId, navigate]);
+  }, [movieId]);
 
   if (!movie) {
     return null;
