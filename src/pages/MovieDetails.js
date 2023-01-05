@@ -32,8 +32,8 @@ const MovieDetails = () => {
   }, [movieId]);
 
   const handleBackClick = () => {
-    const prevPath = location.key !== 'default' ? -1 : '/';
-    navigate(prevPath);
+    const backLinkHref = location.state?.from ?? '/';
+    navigate(backLinkHref);
   };
 
   if (!movie) {
