@@ -1,12 +1,12 @@
 import { Box } from 'components/Box';
-import { useEffect, useRef, useState } from 'react';
+import { Suspense, useEffect, useRef, useState } from 'react';
 import { Outlet, useParams, useNavigate, useLocation } from 'react-router-dom';
 import moviesAPI from 'services/moviedb-api';
 import Poster from 'components/Poster';
 import GenresList from 'components/GenresList';
 import MovieDetailsNavBar from 'components/MovieDetailsNavBar';
 
-export const MovieDetails = () => {
+const MovieDetails = () => {
   const navigate = useNavigate();
   const { movieId } = useParams();
   const [movie, setMovie] = useState();
@@ -80,7 +80,11 @@ export const MovieDetails = () => {
         <MovieDetailsNavBar movieId={movieId} />
       </Box>
 
-      <Outlet context={{ executeScroll }} />
+      <Suspense fallback={<div>Loading subpage...</div>}>
+        <Outlet context={{ executeScroll }} />
+      </Suspense>
     </>
   );
 };
+
+export default MovieDetails;

@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import moviesAPI from 'services/moviedb-api';
 
-export const Movies = () => {
+const Movies = () => {
   const [movies, setMovies] = useState([]);
   const [status, setStatus] = useState('idle');
   const [searchParams, setSearchParams] = useSearchParams();
@@ -44,3 +44,5 @@ export const Movies = () => {
     </>
   );
 };
+
+export default Movies;
