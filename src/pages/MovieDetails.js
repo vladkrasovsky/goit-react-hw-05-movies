@@ -1,6 +1,6 @@
 import { Box } from 'components/Box';
 import { useEffect, useRef, useState } from 'react';
-import { Outlet, useParams, useNavigate } from 'react-router-dom';
+import { Outlet, useParams, useNavigate, useLocation } from 'react-router-dom';
 import moviesAPI from 'services/moviedb-api';
 import Poster from 'components/Poster';
 import GenresList from 'components/GenresList';
@@ -11,6 +11,7 @@ export const MovieDetails = () => {
   const { movieId } = useParams();
   const [movie, setMovie] = useState();
   const footerRef = useRef();
+  const location = useLocation();
 
   const executeScroll = () => footerRef.current.scrollIntoView();
 
@@ -30,6 +31,11 @@ export const MovieDetails = () => {
     fetchMovie();
   }, [movieId]);
 
+  const handleBackClick = () => {
+    const prevPath = location.key !== 'default' ? -1 : '/';
+    navigate(prevPath);
+  };
+
   if (!movie) {
     return null;
   }
@@ -38,7 +44,7 @@ export const MovieDetails = () => {
 
   return (
     <>
-      <button onClick={() => navigate(-1)}>&larr; Go back</button>
+      <button onClick={handleBackClick}>&larr; Go back</button>
 
       <Box display="flex" mt={3} alignItems="flex-start">
         <Poster src={poster_path} width={250} alt={original_title} />
