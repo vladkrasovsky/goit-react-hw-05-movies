@@ -2,21 +2,25 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { List } from './MovieDetailsNavBar.styled';
 
-const MovieDetailsNavBar = ({ movieId }) => {
+const MovieDetailsNavBar = ({ from }) => {
   return (
     <List>
       <li>
-        <Link to={`/movies/${movieId}/cast`}>Cast</Link>
+        <Link to={`cast`} state={{ from }}>
+          Cast
+        </Link>
       </li>
       <li>
-        <Link to={`/movies/${movieId}/reviews`}>Reviews</Link>
+        <Link to={`reviews`} state={{ from }}>
+          Reviews
+        </Link>
       </li>
     </List>
   );
 };
 
 MovieDetailsNavBar.propTypes = {
-  movieId: PropTypes.string.isRequired,
+  from: PropTypes.objectOf(PropTypes.string).isRequired,
 };
 
 export default MovieDetailsNavBar;

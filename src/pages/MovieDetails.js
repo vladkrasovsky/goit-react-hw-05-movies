@@ -9,9 +9,10 @@ import MovieDetailsNavBar from 'components/MovieDetailsNavBar';
 const MovieDetails = () => {
   const navigate = useNavigate();
   const { movieId } = useParams();
-  const [movie, setMovie] = useState();
+  const [movie, setMovie] = useState(null);
   const footerRef = useRef();
   const location = useLocation();
+  const backLinkHref = location.state?.from ?? '/';
 
   const executeScroll = () => footerRef.current.scrollIntoView();
 
@@ -31,10 +32,7 @@ const MovieDetails = () => {
     fetchMovie();
   }, [movieId]);
 
-  const handleBackClick = () => {
-    const backLinkHref = location.state?.from ?? '/';
-    navigate(backLinkHref);
-  };
+  const handleBackClick = () => navigate(backLinkHref);
 
   if (!movie) {
     return null;
@@ -77,7 +75,7 @@ const MovieDetails = () => {
         borderBottom="2px solid"
       >
         <Box as="p">Additional information</Box>
-        <MovieDetailsNavBar movieId={movieId} />
+        <MovieDetailsNavBar from={backLinkHref} />
       </Box>
 
       <Suspense fallback={<div>Loading subpage...</div>}>
